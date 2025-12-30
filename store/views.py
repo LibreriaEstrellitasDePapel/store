@@ -1,8 +1,13 @@
 from django.shortcuts import redirect,get_object_or_404,render
-from .models import Book
+from .models import Book,Category
 def catalog(request):
-    books=Book.objects.all()
-    return render(request,'store/catalog.html',{'books': books})
+    category_id=request.GET.get('category')
+    categories=Category.objects.all()
+    if category_id:
+        books=Book.objects.filter(category_id=category_id)
+    else:
+        books=Book.objects.all()
+    return render(request,'store/catalog.html',{'books': books,'categories': categories,})
 def add_to_cart(request,book_id):
     cart=request.session.get('cart',{})
     cart[str(book_id)]=cart.get(str(book_id),0)+1

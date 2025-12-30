@@ -1,3 +1,14 @@
+<h2>Categorías</h2>
+<ul>
+  <li><a href="/">Todas</a></li>
+  {% for category in categories %}
+    <li>
+      <a href="/?category={{ category.id }}">
+        {{ category.name }}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
 {% for book in books %}
   <li>
     {{ book.title }} - ${{ book.price }}
