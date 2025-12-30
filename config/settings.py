@@ -23,11 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%%ds(!475_yij&t1o1kpuqi0g*w8$b7h4rhbcp4@&w$5d5*lbk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    "store-b3am.onrender.com",
-]
+ALLOWED_HOSTS = ["store-b3am.onrender.com"]
+
 
 
 
