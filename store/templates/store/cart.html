@@ -6,6 +6,15 @@
     = ${{ item.subtotal }}
   </li>
 {% endfor %}
+{% for item in items %}
+  <p>
+    {{ item.book.title }} ({{ item.quantity }})
+    <a href="{% url 'remove_from_cart' item.book.id %}">
+      Eliminar
+    </a>
+  </p>
+{% endfor %}
+
 </ul>
 <p>Total: ${{ total }}</p>
 <a href="/">Volver</a>
