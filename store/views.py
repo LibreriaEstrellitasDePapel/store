@@ -9,14 +9,15 @@ def add_to_cart(request,book_id):
     request.session['cart']=cart
     return redirect('catalog')
 def view_cart(request):
-    cart=request.session.get('cart',{})
-    books,total=[],0
-    for book_id,quantity in cart.items():
-        book=get_object_or_404(Book,id=book_id)
-        subtotal=book.price*quantity
-        total+=subtotal
-        books.append({'book':book,'quantity':quantity,'subtotal':subtotal})
-    return render(request,'store/cart.html',{'books':books,'total':total})
+    cart = request.session.get('cart', {})
+    items = []
+    total = 0
+    for book_id, quantity in cart.items():
+        book = Book.objects.get(id=book_id)
+        subtotal = book.price * quantity
+        total += subtotal
+        items.append({'book': book,'quantity': quantity,'subtotal': subtotal,})
+    return render(request, 'store/cart.html', {'items': items,'total': total,})
 def remove_from_cart(request,book_id):
     cart=request.session.get('cart',{})
     book_id=str(book_id)
