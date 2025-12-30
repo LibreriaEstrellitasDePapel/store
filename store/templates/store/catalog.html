@@ -1,9 +1,8 @@
-<h1>Librería</h1>
-<ul>
 {% for book in books %}
   <li>
-    <strong>{{ book.title }}</strong> - {{ book.author }}
-    ${{ book.price }}
+    {{ book.title }} - ${{ book.price }}
+    <a href="{% url 'add_to_cart' book.id %}">Agregar</a>
   </li>
 {% endfor %}
-</ul>
+
+<a href="{% url 'view_cart' %}">Ver carrito</a>

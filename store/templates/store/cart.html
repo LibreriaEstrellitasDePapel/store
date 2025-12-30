@@ -1,0 +1,11 @@
+<h1>Carrito</h1>
+<ul>
+{% for item in books %}
+  <li>
+    {{ item.book.title }} x {{ item.quantity }}
+    = ${{ item.subtotal }}
+  </li>
+{% endfor %}
+</ul>
+<p>Total: ${{ total }}</p>
+<a href="/">Volver</a>
