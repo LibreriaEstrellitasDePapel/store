@@ -1,5 +1,7 @@
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from .models import Book
+from .models import Book
+
 def catalog(request):
     books = Book.objects.all()
     return render(request, 'store/catalog.html', {'books': books})
