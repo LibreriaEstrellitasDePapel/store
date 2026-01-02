@@ -1,7 +1,7 @@
 from django.shortcuts import redirect,render,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import CartItem,Book,Category
+from .models import CartItem,Book,Category,Cart
 def catalog(request):
     category_id=request.GET.get('category')
     categories=Category.objects.all()
@@ -25,16 +25,9 @@ def add_to_cart(request, book_id):
     return redirect('catalog')
 @login_required
 def view_cart(request):
-    if request.user.is_authenticated:
-        items = request.user.cart.items.all()
-        return render(request, 'store/cart.html', {'items': items})
-    cart = request.session.get('cart', {})
-    books = []
-    for book_id, qty in cart.items():
-        book = Book.objects.get(id=book_id)
-        book.quantity = qty
-        books.append(book)
-    return render(request, 'store/cart.html', {'session_books': books})
+    cart, created = Cart.objects.get_or_create(user=request.user)
+    items = cart.items.all()
+    return render(request, "store/cart.html", {"items": items})
 @login_required
 def remove_from_cart(request, book_id):
     cart = request.user.cart
