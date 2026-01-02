@@ -26,8 +26,9 @@ def add_to_cart(request, book_id):
 @login_required
 def view_cart(request):
     cart,_=Cart.objects.get_or_create(user=request.user)
-    items = cart.items.all()
-    return render(request, "store/cart.html", {"items": items})
+    items=cart.items.all()
+    total=cart.total()
+    return render(request,"store/cart.html",{"items":items,"total":total,})
 @login_required
 def remove_from_cart(request, book_id):
     cart, _ = Cart.objects.get_or_create(user=request.user)
