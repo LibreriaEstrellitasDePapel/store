@@ -5,7 +5,7 @@
   {% endfor %}
 </ul>
 {% for book in books %}
-  <li>{{ book.title }} - ${{ book.price }}
+  <a href="{% url 'book_detail' book.id %}">{{book.title}}</a><li> - ${{ book.price }}
     <a href="{% url 'add_to_cart' book.id %}">Agregar</a>
   </li>
 {% endfor %}
@@ -16,4 +16,3 @@
   {% csrf_token %}
   <button type="submit">Salir</button>
 </form>{% else %}<a href="/accounts/login/">Login</a><a href="/register/">Registro</a>{% endif %}
-<a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
