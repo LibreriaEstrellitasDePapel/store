@@ -1,4 +1,5 @@
-from django.shortcuts import redirect,get_object_or_404,render
+from django.shortcuts import redirect,render,get_object_or_404
+from django.contrib.auth.forms import UserCreationForm
 from .models import Book,Category
 def catalog(request):
     category_id=request.GET.get('category')
@@ -30,3 +31,12 @@ def remove_from_cart(request,book_id):
         del cart[book_id]
     request.session['cart']=cart
     return redirect('view_cart')
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form=UserCreationForm()
+    return render(request, 'store/register.html', {'form': form})

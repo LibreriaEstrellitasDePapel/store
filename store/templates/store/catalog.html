@@ -17,3 +17,11 @@
 {% endfor %}
 
 <a href="{% url 'view_cart' %}">Ver carrito</a>
+
+{% if user.is_authenticated %}
+  Hola {{ user.username }}
+  <a href="/accounts/logout/">Salir</a>
+{% else %}
+  <a href="/accounts/login/">Login</a>
+  <a href="/register/">Registro</a>
+{% endif %}
