@@ -1,14 +1,15 @@
 <h1>Carrito</h1>
-{% for item in items %}
-  <p>
-    {{ item.book.title }}
-    x {{ item.quantity }}
-    = ${{ item.subtotal }}
-    <a href="{% url 'remove_from_cart' item.book.id %}">Eliminar</a>
-  </p>
-{% empty %}
+{% if items %}
+  {% for item in items %}
+    <p>{{ item.book.title }} x {{ item.quantity }} = ${{ item.subtotal }}</p>
+  {% endfor %}
+{% elif session_books %}
+  {% for book in session_books %}
+    <p>{{ item.book.title }} x {{ item.quantity }} = ${{ item.subtotal }}</p>
+  {% endfor %}
+{% else %}
   <p>Carrito vacío</p>
-{% endfor %}
+{% endif %}
 <hr>
 <p><strong>Total: ${{ total }}</strong></p>
 <a href="/">Volver</a>
