@@ -13,7 +13,7 @@ def catalog(request):
 @login_required
 def add_to_cart(request, book_id):
     if request.user.is_authenticated:
-        cart = request.user.cart
+        cart,_=Cart.objects.get_or_create(user=request.user)
         item, created = CartItem.objects.get_or_create(cart=cart,book_id=book_id)
         if not created:
             item.quantity+=1
@@ -25,12 +25,12 @@ def add_to_cart(request, book_id):
     return redirect('catalog')
 @login_required
 def view_cart(request):
-    cart, created = Cart.objects.get_or_create(user=request.user)
+    cart,_=Cart.objects.get_or_create(user=request.user)
     items = cart.items.all()
     return render(request, "store/cart.html", {"items": items})
 @login_required
 def remove_from_cart(request, book_id):
-    cart = request.user.cart
+    cart, _ = Cart.objects.get_or_create(user=request.user)
     CartItem.objects.filter(cart=cart,book_id=book_id).delete()
     return redirect('view_cart')
 def register(request):
