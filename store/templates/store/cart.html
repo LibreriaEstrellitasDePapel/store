@@ -1,11 +1,11 @@
 <h1>Carrito</h1>
 {% for item in items %}
-  <div>
+  <p>
     {{ item.book.title }}
     x {{ item.quantity }}
     = ${{ item.subtotal }}
     <a href="{% url 'remove_from_cart' item.book.id %}">Eliminar</a>
-  </div>
+  </p>
 {% empty %}
   <p>Carrito vacío</p>
 {% endfor %}
