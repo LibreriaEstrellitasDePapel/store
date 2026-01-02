@@ -1,16 +1,16 @@
 <h1>Carrito</h1>
 {%if items%}
   {%for item in items%}
-    <p>{{item.book.title}} x {{item.quantity}} — {{item.book.price}} = {{item.subtotal}}
-      <a href="{% url 'decrease_quantity' item.id %}">-</a>
-      <a href="{% url 'increase_quantity' item.id %}">+</a>
+    <p><a href="{% url 'book_detail' item.book.id %}">{{item.book.title}}</a>x {{item.quantity}} : {{item.book.price}} = {{item.subtotal}}
+      <p href="{% url 'decrease_quantity' item.id %}">-</p>
+      <p href="{% url 'increase_quantity' item.id %}">+</p>
     </p>
   {%endfor%}
 {%elif session_books%}
   {%for item in session_books%}
-    <p>{{item.book.title}} x {{item.quantity}} — {{item.book.price}} = {{item.subtotal}}
-      <a href="{% url 'decrease_quantity' item.id %}">-</a>
-      <a href="{% url 'increase_quantity' item.id %}">+</a>
+    <p><a href="{% url 'book_detail' item.book.id %}">{{item.book.title}}</a>x {{item.quantity}} : {{item.book.price}} = {{item.subtotal}}
+      <p href="{% url 'decrease_quantity' item.id %}">-</p>
+      <p href="{% url 'increase_quantity' item.id %}">+</p>
     </p>
   {%endfor%}
 {%else%}<p>Carrito vacío</p>{%endif%}

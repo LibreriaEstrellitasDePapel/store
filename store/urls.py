@@ -1,4 +1,4 @@
-from store.views import catalog,add_to_cart,remove_from_cart,view_cart,register,increase_quantity,decrease_quantity
+from store.views import catalog,add_to_cart,remove_from_cart,view_cart,register,increase_quantity,decrease_quantity,book_detail
 from django.urls import path
 urlpatterns=[
     path('',catalog,name='catalog'),
@@ -8,4 +8,5 @@ urlpatterns=[
     path('register/',register,name='register'),
     path("cart/increase/<int:item_id>/",increase_quantity,name="increase_quantity"),
     path("cart/decrease/<int:item_id>/",decrease_quantity,name="decrease_quantity"),
+    path("book/<int:book_id>/", book_detail, name="book_detail"),
 ]

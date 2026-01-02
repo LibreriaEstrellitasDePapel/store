@@ -58,3 +58,6 @@ def decrease_quantity(request,item_id):
     else:
         item.delete()
     return redirect("view_cart")
+def book_detail(request, book_id):
+    book=get_object_or_404(Book,id=book_id)
+    return render(request,"store/book_detail.html",{"book":book})
